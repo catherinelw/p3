@@ -1,0 +1,36 @@
+version: "3.1"
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    network_mode: bridge
+    #    volumes:
+    #      - postgres-data:/var/lib/postgresql/data
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=testdb
+
+  # APP*****************************************
+  springbootapp:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: springbootapp
+    network_mode: bridge
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    links:
+      - postgres
+#volumes:
+#  postgres-data:
