@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -45,10 +46,13 @@ public class Product {
     private Double weight;
 
     @Column(name = "standardPrice")
-    private Double standardPrice;
+    private BigDecimal standardPrice;
 
     @Column(name = "cost")
-    private Double cost;
+    private BigDecimal cost;
+
+    @Column(name = "quantity")
+    private Integer quantity;
 
     @Column(name = "remark")
     private String remark;
